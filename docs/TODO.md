@@ -1,0 +1,77 @@
+# Shortlist progress
+
+Claude manages this file. Step details are in `ROADMAP.md`.
+
+Current step: 0.1
+
+## Phase 0: Foundation
+
+- [ ] 0.1 Create the app
+- [ ] 0.2 Code quality
+- [ ] 0.3 Local services
+- [ ] 0.4 Prisma and env validation
+- [ ] 0.5 CI
+
+## Phase 1: Auth and API
+
+- [ ] 1.1 Better Auth
+- [ ] 1.2 Google login
+- [ ] 1.3 oRPC and TanStack Query
+- [ ] 1.4 Protected procedures and pages
+
+## Phase 2: Master resume
+
+- [ ] 2.1 Resume schema
+- [ ] 2.2 Resume API
+- [ ] 2.3 Resume editor
+
+## Phase 3: Tracker and first deploy
+
+- [ ] 3.1 Application API
+- [ ] 3.2 Tracker UI
+- [ ] 3.3 Production images
+- [ ] 3.4 Deploy
+
+## Phase 4: Job match
+
+- [ ] 4.1 Queue and worker
+- [ ] 4.2 Retries and failures
+- [ ] 4.3 AI layer with mock
+- [ ] 4.4 Requirement extraction
+- [ ] 4.5 Matching and scoring
+- [ ] 4.6 Caching and limits
+- [ ] 4.7 First evals
+
+## Phase 5: Tailoring
+
+- [ ] 5.1 Suggestions
+- [ ] 5.2 Honesty checks
+- [ ] 5.3 Review UI
+- [ ] 5.4 Resume versions
+
+## Phase 6: PDF import and export
+
+- [ ] 6.1 PDF export
+- [ ] 6.2 PDF import
+
+## Phase 7: Launch
+
+- [ ] 7.1 Reply rates
+- [ ] 7.2 Account safety
+- [ ] 7.3 Monitoring
+- [ ] 7.4 End-to-end tests
+- [ ] 7.5 Launch
+
+## Phase 8: Scale and AWS
+
+- [ ] 8.1 Load test
+- [ ] 8.2 Move to AWS
+- [ ] 8.3 Decide what's next
+
+## Follow-ups
+
+None yet.
+
+## Ideas for later
+
+None yet.
