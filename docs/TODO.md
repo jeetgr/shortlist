@@ -2,12 +2,12 @@
 
 Claude manages this file. Step details are in `ROADMAP.md`.
 
-Current step: 0.2
+Current step: 0.3
 
 ## Phase 0: Foundation
 
 - [x] 0.1 Create the app
-- [ ] 0.2 Code quality
+- [x] 0.2 Code quality
 - [ ] 0.3 Local services
 - [ ] 0.4 Prisma and env validation
 - [ ] 0.5 CI
@@ -70,6 +70,7 @@ Current step: 0.2
 
 ## Follow-ups
 
+- 0.5: run `biome check` in CI, not just `biome lint`, so formatting and import order get checked too.
 - 3.3: `nitro` is a pinned beta, so check for a stable release before the production build.
 - 3.3: remove the unused `@sentry` external from `vite.config.ts`, unless Sentry gets added in 7.3.
 - 7.5: replace the starter page title and README.

@@ -10,9 +10,11 @@
     "generate-routes": "tsr generate",
     "build": "vite build",
     "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
     "format": "biome format",
     "lint": "biome lint",
-    "check": "biome check"
+    "check": "biome check",
+    "verify": "pnpm check && pnpm typecheck"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",

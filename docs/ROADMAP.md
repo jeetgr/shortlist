@@ -16,10 +16,9 @@ Steps are done only when their "Done when" list passes. Use each library's curre
 **Done when:** the app runs locally, and `git status` doesn't show `.env`.
 
 ### 0.2 Code quality
-- Set up lint and format tools, and scripts for `lint`, `typecheck` and `test`.
-- Add Vitest with one small test.
+- Set up lint and format tools, and scripts for `lint` and `typecheck`.
 
-**Done when:** all three scripts pass.
+**Done when:** both scripts pass.
 
 ### 0.3 Local services
 - Add a Docker Compose file with Postgres and Redis, including health checks and named volumes.
@@ -34,9 +33,9 @@ Steps are done only when their "Done when" list passes. Use each library's curre
 **Done when:** a missing env var stops startup with a clear error, and the health route returns OK.
 
 ### 0.5 CI
-- Add a GitHub Actions workflow that runs lint, type check, tests and build.
+- Add a GitHub Actions workflow that runs lint, type check and build.
 
-**Done when:** CI passes on GitHub, and a deliberately broken test fails it.
+**Done when:** CI passes on GitHub, and a deliberate type error fails it.
 
 **Interview angle:** why env validation fails fast at startup.
 
@@ -64,7 +63,7 @@ Steps are done only when their "Done when" list passes. Use each library's curre
 ### 1.4 Protected procedures and pages
 - Add auth middleware that puts the session user in the context.
 - Add a protected `me` procedure and a `/dashboard` page.
-- Add an integration test for the unauthorized case.
+- Add Vitest, an integration test for the unauthorized case, and a test step in CI.
 
 **Done when:** signed-out users get redirected, and the API returns 401.
 
