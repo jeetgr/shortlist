@@ -2,7 +2,7 @@
 
 Claude manages this file. Step details are in `ROADMAP.md`.
 
-Current step: 1.1
+Current step: 1.2
 
 ## Phase 0: Foundation
 
@@ -14,7 +14,7 @@ Current step: 1.1
 
 ## Phase 1: Auth and API
 
-- [ ] 1.1 Better Auth
+- [x] 1.1 Better Auth
 - [ ] 1.2 Google login
 - [ ] 1.3 oRPC and TanStack Query
 - [ ] 1.4 Protected procedures and pages

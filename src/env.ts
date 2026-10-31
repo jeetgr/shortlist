@@ -10,6 +10,8 @@ export const env = createEnv({
 		NODE_ENV: v.optional(v.picklist(["development", "production", "test"]), "development"),
 		DATABASE_URL: v.pipe(v.string(), v.url()),
 		REDIS_URL: v.pipe(v.string(), v.url()),
+		BETTER_AUTH_SECRET: v.pipe(v.string(), v.minLength(32)),
+		BETTER_AUTH_URL: v.pipe(v.string(), v.url()),
 	},
 
 	/*
@@ -20,6 +22,8 @@ export const env = createEnv({
 		NODE_ENV: process.env.NODE_ENV,
 		DATABASE_URL: process.env.DATABASE_URL,
 		REDIS_URL: process.env.REDIS_URL,
+		BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
+		BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
 	},
 
 	emptyStringAsUndefined: true,
