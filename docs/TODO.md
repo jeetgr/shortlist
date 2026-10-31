@@ -2,14 +2,14 @@
 
 Claude manages this file. Step details are in `ROADMAP.md`.
 
-Current step: 0.4
+Current step: 0.5
 
 ## Phase 0: Foundation
 
 - [x] 0.1 Create the app
 - [x] 0.2 Code quality
 - [x] 0.3 Local services
-- [ ] 0.4 Prisma and env validation
+- [x] 0.4 Prisma and env validation
 - [ ] 0.5 CI
 
 ## Phase 1: Auth and API
@@ -70,7 +70,8 @@ Current step: 0.4
 
 ## Follow-ups
 
-- 0.5: run `biome check` in CI, not just `biome lint`, so formatting and import order get checked too.
+- 0.5: run `prisma generate` before type checking in CI, because `src/generated` is ignored by Git.
+- 0.5: run `pnpm check` in CI.
 - 3.3: add `compose.prod.yaml` with app and worker images, strong secrets, and no public Postgres or Redis ports.
 - 3.3: `nitro` is a pinned beta, so check for a stable release before the production build.
 - 3.3: remove the unused `@sentry` external from `vite.config.ts`, unless Sentry gets added in 7.3.
