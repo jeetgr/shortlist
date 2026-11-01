@@ -1,14 +1,15 @@
+import { ORPCError } from "@orpc/client";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/(app)")({
 	beforeLoad: async ({ context: { queryClient, orpc } }) => {
-		const isAuthed = await queryClient
-			.query(orpc.user.me.queryOptions())
-			.then(() => true)
-			.catch(() => false);
-
-		if (!isAuthed) {
-			throw redirect({ to: "/sign-in" });
+		try {
+			await queryClient.query(orpc.user.me.queryOptions());
+		} catch (error) {
+			if (error instanceof ORPCError && error.code === "UNAUTHORIZED") {
+				throw redirect({ to: "/sign-in" });
+			}
+			throw error;
 		}
 	},
 });

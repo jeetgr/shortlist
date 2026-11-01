@@ -1,4 +1,5 @@
 import { publicProcedure } from "..";
+import { resumeRouter } from "./resume";
 import { userRouter } from "./user";
 
 export default {
@@ -6,4 +7,5 @@ export default {
 		return { status: "OK" };
 	}),
 	user: userRouter,
+	resume: resumeRouter,
 };

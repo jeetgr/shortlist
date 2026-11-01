@@ -2,7 +2,7 @@
 
 Claude manages this file. Step details are in `ROADMAP.md`.
 
-Current step: 2.2
+Current step: 2.3
 
 ## Phase 0: Foundation
 
@@ -22,7 +22,7 @@ Current step: 2.2
 ## Phase 2: Master resume
 
 - [x] 2.1 Resume schema
-- [ ] 2.2 Resume API
+- [x] 2.2 Resume API (hand-checked, tests deferred to 7.4)
 - [ ] 2.3 Resume editor
 
 ## Phase 3: Tracker and first deploy
@@ -70,9 +70,8 @@ Current step: 2.2
 
 ## Follow-ups
 
-- 2.2: clear the TanStack Query cache on sign-out, so the next user on that browser never sees cached resume data.
-- 2.2: in `(app)/route.tsx`, redirect only on `UNAUTHORIZED`, so a database outage doesn't look like being signed out.
-- 2.2: check by hand that one user can't read another's resume, since tests are deferred.
+- 2.3: click sign-out in the browser, then sign in as another user, and confirm no cached resume data shows.
+- 7.2: add size limits to `resumeSchema` arrays and text, so one user can't store an unbounded resume.
 - 7.2: after adding email verification, test that Google links to a verified password account. Until then, Better Auth blocks linking to unverified accounts.
 - 7.2: show a friendly message when Google sign-in fails with `account_not_linked`.
 - 3.3: add `compose.prod.yaml` with app and worker images, strong secrets, and no public Postgres or Redis ports.
