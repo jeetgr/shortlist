@@ -2,7 +2,7 @@
 
 Claude manages this file. Step details are in `ROADMAP.md`.
 
-Current step: 1.4
+Current step: 2.1
 
 ## Phase 0: Foundation
 
@@ -17,7 +17,7 @@ Current step: 1.4
 - [x] 1.1 Better Auth
 - [x] 1.2 Google login (linking to verified accounts tested in 7.2)
 - [x] 1.3 oRPC and TanStack Query
-- [ ] 1.4 Protected procedures and pages
+- [x] 1.4 Protected procedures and pages
 
 ## Phase 2: Master resume
 
@@ -59,7 +59,7 @@ Current step: 1.4
 - [ ] 7.1 Reply rates
 - [ ] 7.2 Account safety
 - [ ] 7.3 Monitoring
-- [ ] 7.4 End-to-end tests
+- [ ] 7.4 Test suite
 - [ ] 7.5 Launch
 
 ## Phase 8: Scale and AWS
@@ -70,8 +70,9 @@ Current step: 1.4
 
 ## Follow-ups
 
-- 1.4: pass `request.headers` as context in `/api/rpc`, and type it with `os.$context`, so both handler and SSR client give procedures the same context.
-- 1.4: check the client bundle stays free of Prisma once procedures import `db`.
+- 2.2: clear the TanStack Query cache on sign-out, so the next user on that browser never sees cached resume data.
+- 2.2: in `(app)/route.tsx`, redirect only on `UNAUTHORIZED`, so a database outage doesn't look like being signed out.
+- 2.2: check by hand that one user can't read another's resume, since tests are deferred.
 - 7.2: after adding email verification, test that Google links to a verified password account. Until then, Better Auth blocks linking to unverified accounts.
 - 7.2: show a friendly message when Google sign-in fails with `account_not_linked`.
 - 3.3: add `compose.prod.yaml` with app and worker images, strong secrets, and no public Postgres or Redis ports.

@@ -1,7 +1,9 @@
-import { os } from "@orpc/server";
+import { publicProcedure } from "..";
+import { userRouter } from "./user";
 
 export default {
-	health: os.handler(() => {
+	health: publicProcedure.handler(() => {
 		return { status: "OK" };
 	}),
+	user: userRouter,
 };
