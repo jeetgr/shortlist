@@ -2,7 +2,7 @@
 
 Claude manages this file. Step details are in `ROADMAP.md`.
 
-Current step: 3.1
+Current step: 3.2
 
 ## Phase 0: Foundation
 
@@ -27,7 +27,7 @@ Current step: 3.1
 
 ## Phase 3: Tracker and first deploy
 
-- [ ] 3.1 Application API
+- [x] 3.1 Application API (hand-checked, tests deferred to 7.4)
 - [ ] 3.2 Tracker UI
 - [ ] 3.3 Production images
 - [ ] 3.4 Deploy
@@ -71,6 +71,7 @@ Current step: 3.1
 ## Follow-ups
 
 - 7.2: add size limits to `resumeSchema` arrays and text, so one user can't store an unbounded resume.
+- 6.1: restrict `resumeSchema` URLs to http and https before rendering them as links, because `v.url` accepts `javascript:`.
 - 7.2: after adding email verification, test that Google links to a verified password account. Until then, Better Auth blocks linking to unverified accounts.
 - 7.2: show a friendly message when Google sign-in fails with `account_not_linked`.
 - 3.3: add `compose.prod.yaml` with app and worker images, strong secrets, and no public Postgres or Redis ports.

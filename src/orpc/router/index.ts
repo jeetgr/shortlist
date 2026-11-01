@@ -1,4 +1,5 @@
 import { publicProcedure } from "..";
+import { applicationRouter } from "./application";
 import { resumeRouter } from "./resume";
 import { userRouter } from "./user";
 
@@ -8,4 +9,5 @@ export default {
 	}),
 	user: userRouter,
 	resume: resumeRouter,
+	application: applicationRouter,
 };
