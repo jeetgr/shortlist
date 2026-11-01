@@ -2,7 +2,7 @@
 
 Claude manages this file. Step details are in `ROADMAP.md`.
 
-Current step: 2.1
+Current step: 2.2
 
 ## Phase 0: Foundation
 
@@ -21,7 +21,7 @@ Current step: 2.1
 
 ## Phase 2: Master resume
 
-- [ ] 2.1 Resume schema
+- [x] 2.1 Resume schema
 - [ ] 2.2 Resume API
 - [ ] 2.3 Resume editor
 
