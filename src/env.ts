@@ -12,6 +12,8 @@ export const env = createEnv({
 		REDIS_URL: v.pipe(v.string(), v.url()),
 		BETTER_AUTH_SECRET: v.pipe(v.string(), v.minLength(32)),
 		BETTER_AUTH_URL: v.pipe(v.string(), v.url()),
+		GOOGLE_CLIENT_ID: v.pipe(v.string(), v.minLength(1)),
+		GOOGLE_CLIENT_SECRET: v.pipe(v.string(), v.minLength(1)),
 	},
 
 	/*
@@ -24,6 +26,8 @@ export const env = createEnv({
 		REDIS_URL: process.env.REDIS_URL,
 		BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
 		BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
+		GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+		GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
 	},
 
 	emptyStringAsUndefined: true,

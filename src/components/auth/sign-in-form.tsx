@@ -1,6 +1,7 @@
 import { Link, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 
+import { GoogleButton } from "#/components/auth/google-button";
 import { Alert, AlertDescription } from "#/components/ui/alert";
 import {
 	Card,
@@ -10,7 +11,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "#/components/ui/card";
-import { FieldGroup } from "#/components/ui/field";
+import { FieldGroup, FieldSeparator } from "#/components/ui/field";
 import { useAppForm } from "#/hooks/form";
 import { authClient } from "#/lib/auth-client";
 import { signInSchema } from "#/lib/auth-schemas";
@@ -68,6 +69,10 @@ export function SignInForm() {
 					<form.AppForm>
 						<form.SubmitButton label="Sign in" />
 					</form.AppForm>
+					<FieldSeparator className="*:data-[slot=field-separator-content]:bg-card w-full">
+						or
+					</FieldSeparator>
+					<GoogleButton />
 					<p className="text-muted-foreground text-sm">
 						New here?{" "}
 						<Link to="/sign-up" className="underline underline-offset-4">

@@ -2,7 +2,7 @@
 
 Claude manages this file. Step details are in `ROADMAP.md`.
 
-Current step: 1.2
+Current step: 1.3
 
 ## Phase 0: Foundation
 
@@ -15,7 +15,7 @@ Current step: 1.2
 ## Phase 1: Auth and API
 
 - [x] 1.1 Better Auth
-- [ ] 1.2 Google login
+- [x] 1.2 Google login (linking to verified accounts tested in 7.2)
 - [ ] 1.3 oRPC and TanStack Query
 - [ ] 1.4 Protected procedures and pages
 
@@ -70,6 +70,8 @@ Current step: 1.2
 
 ## Follow-ups
 
+- 7.2: after adding email verification, test that Google links to a verified password account. Until then, Better Auth blocks linking to unverified accounts.
+- 7.2: show a friendly message when Google sign-in fails with `account_not_linked`.
 - 3.3: add `compose.prod.yaml` with app and worker images, strong secrets, and no public Postgres or Redis ports.
 - 3.3: `nitro` is a pinned beta, so check for a stable release before the production build.
 - 3.3: remove the unused `@sentry` external from `vite.config.ts`, unless Sentry gets added in 7.3.
