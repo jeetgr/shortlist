@@ -2,7 +2,7 @@
 
 Claude manages this file. Step details are in `ROADMAP.md`.
 
-Current step: 3.3
+Current step: 3.4
 
 ## Phase 0: Foundation
 
@@ -29,7 +29,7 @@ Current step: 3.3
 
 - [x] 3.1 Application API (hand-checked, tests deferred to 7.4)
 - [x] 3.2 Tracker UI
-- [ ] 3.3 Production images
+- [x] 3.3 Production images
 - [ ] 3.4 Deploy
 
 ## Phase 4: Job match
@@ -74,9 +74,10 @@ Current step: 3.3
 - 6.1: restrict `resumeSchema` URLs to http and https before rendering them as links, because `v.url` accepts `javascript:`.
 - 7.2: after adding email verification, test that Google links to a verified password account. Until then, Better Auth blocks linking to unverified accounts.
 - 7.2: show a friendly message when Google sign-in fails with `account_not_linked`.
-- 3.3: add `compose.prod.yaml` with app and worker images, strong secrets, and no public Postgres or Redis ports.
-- 3.3: `nitro` is a pinned beta, so check for a stable release before the production build.
-- 3.3: remove the unused `@sentry` external from `vite.config.ts`, unless Sentry gets added in 7.3.
+- 7.5: `nitro` is a pinned beta. As of 2026-11-01 the newest is `3.0.261029-rc`, with no stable release, so recheck before launch.
+- 4.1: add the worker image and service to `compose.prod.yaml`, and add it to the VPS memory budget.
+- 3.4: deploy using the conventions in `work/games/deploy/vps-setup.md`, "Adding another site": `/srv/shortlist`, `sites/shortlist.caddy` pointing at `shortlist-app:3000`, and a backup script and cron line.
+- 3.4: the VPS Docker login for `ghcr.io` belongs to `webcyte`, and Docker keeps one login per registry, so pulling private `jeetgr` images needs a separate `DOCKER_CONFIG` or public packages.
 - 7.5: replace the starter page title and README, and send signed-in users from `/` to the dashboard, because `/` has no links into the app.
 
 ## Ideas for later

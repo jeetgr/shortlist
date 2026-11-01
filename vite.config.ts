@@ -12,7 +12,6 @@ const config = defineConfig({
 		devtools(),
 		nitro({
 			plugins: ["./src/server/plugins/validate-env.ts"],
-			rollupConfig: { external: [/^@sentry\//] },
 		}),
 		tailwindcss(),
 		tanstackStart(),

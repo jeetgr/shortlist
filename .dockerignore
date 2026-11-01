@@ -1,0 +1,14 @@
+.git
+.github
+.env*
+.output
+.nitro
+.tanstack
+.vscode
+node_modules
+docs
+Dockerfile
+.dockerignore
+compose*.yaml
+*.md
+src/generated

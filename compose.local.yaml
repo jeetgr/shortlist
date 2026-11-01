@@ -1,0 +1,6 @@
+# Runs the production stack on this machine, where there's no edge Caddy in front of it:
+#   docker compose -f compose.prod.yaml -f compose.local.yaml --env-file .env.production up -d --build
+services:
+  app:
+    ports:
+      - "127.0.0.1:${APP_PORT:-3000}:3000"

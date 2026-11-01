@@ -1,0 +1,125 @@
+# On the server this file becomes /srv/shortlist/compose.yml. The dev stack already uses the
+# name "shortlist", and sharing it would make both stacks share containers and volumes.
+name: shortlist-prod
+
+# Prod pulls these images from GHCR (built by CI); `build` stays for local builds.
+x-build: &build
+  context: .
+  dockerfile: Dockerfile
+
+x-database-url: &database-url postgresql://${DB_USER:?}:${DB_PASSWORD:?}@db:5432/${DB_NAME:?}
+x-redis-url: &redis-url redis://:${REDIS_PASSWORD:?}@redis:6379
+
+services:
+  db:
+    image: postgres:18.6
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:?}
+      POSTGRES_USER: ${DB_USER:?}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?}
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+
+  redis:
+    image: redis:8.8.1-alpine
+    restart: unless-stopped
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?}
+    # The password reaches redis as config on stdin, not as an argument, so it never shows
+    # in process lists. BullMQ needs noeviction, or Redis could delete queued jobs.
+    command:
+      - sh
+      - -c
+      - |
+        exec docker-entrypoint.sh redis-server - <<EOF
+        requirepass $$REDIS_PASSWORD
+        appendonly yes
+        maxmemory-policy noeviction
+        EOF
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", 'REDISCLI_AUTH="$$REDIS_PASSWORD" redis-cli ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          memory: 128m
+
+  migrate:
+    image: ghcr.io/jeetgr/shortlist-migrate:${IMAGE_TAG:-latest}
+    build:
+      <<: *build
+      target: migrate
+    restart: "no"
+    environment:
+      DATABASE_URL: *database-url
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # No gateway: the Nitro server handles pages, assets and the API, so the edge Caddy
+  # proxies straight to it. Only this service joins the shared edge network.
+  app:
+    image: ghcr.io/jeetgr/shortlist-app:${IMAGE_TAG:-latest}
+    build:
+      <<: *build
+      target: app
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: *database-url
+      REDIS_URL: *redis-url
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?}
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:?}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:?}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:?}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://localhost:3000/api/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      default:
+      edge:
+        aliases:
+          - shortlist-app
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+
+networks:
+  edge:
+    external: true
+
+volumes:
+  postgres-data:
+  redis-data:
