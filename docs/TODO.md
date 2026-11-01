@@ -2,7 +2,7 @@
 
 Claude manages this file. Step details are in `ROADMAP.md`.
 
-Current step: 1.3
+Current step: 1.4
 
 ## Phase 0: Foundation
 
@@ -16,7 +16,7 @@ Current step: 1.3
 
 - [x] 1.1 Better Auth
 - [x] 1.2 Google login (linking to verified accounts tested in 7.2)
-- [ ] 1.3 oRPC and TanStack Query
+- [x] 1.3 oRPC and TanStack Query
 - [ ] 1.4 Protected procedures and pages
 
 ## Phase 2: Master resume
@@ -70,6 +70,8 @@ Current step: 1.3
 
 ## Follow-ups
 
+- 1.4: pass `request.headers` as context in `/api/rpc`, and type it with `os.$context`, so both handler and SSR client give procedures the same context.
+- 1.4: check the client bundle stays free of Prisma once procedures import `db`.
 - 7.2: after adding email verification, test that Google links to a verified password account. Until then, Better Auth blocks linking to unverified accounts.
 - 7.2: show a friendly message when Google sign-in fails with `account_not_linked`.
 - 3.3: add `compose.prod.yaml` with app and worker images, strong secrets, and no public Postgres or Redis ports.
