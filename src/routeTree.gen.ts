@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as appRouteRouteImport } from './routes/(app)/route'
 import { Route as appDashboardRouteImport } from './routes/(app)/dashboard'
+import { Route as appResumeRouteImport } from './routes/(app)/resume'
 import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as authSignUpRouteImport } from './routes/(auth)/sign-up'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
@@ -30,6 +31,11 @@ const appRouteRoute = appRouteRouteImport.update({
 const appDashboardRoute = appDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const appResumeRoute = appResumeRouteImport.update({
+  id: '/resume',
+  path: '/resume',
   getParentRoute: () => appRouteRoute,
 } as any)
 const authSignInRoute = authSignInRouteImport.update({
@@ -61,6 +67,7 @@ const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof appDashboardRoute
+  '/resume': typeof appResumeRoute
   '/sign-in': typeof authSignInRoute
   '/sign-up': typeof authSignUpRoute
   '/api/health': typeof ApiHealthRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof appDashboardRoute
+  '/resume': typeof appResumeRoute
   '/sign-in': typeof authSignInRoute
   '/sign-up': typeof authSignUpRoute
   '/api/health': typeof ApiHealthRoute
@@ -81,6 +89,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/(app)': typeof appRouteRouteWithChildren
   '/(app)/dashboard': typeof appDashboardRoute
+  '/(app)/resume': typeof appResumeRoute
   '/(auth)/sign-in': typeof authSignInRoute
   '/(auth)/sign-up': typeof authSignUpRoute
   '/api/health': typeof ApiHealthRoute
@@ -92,6 +101,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
+    | '/resume'
     | '/sign-in'
     | '/sign-up'
     | '/api/health'
@@ -101,6 +111,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/dashboard'
+    | '/resume'
     | '/sign-in'
     | '/sign-up'
     | '/api/health'
@@ -111,6 +122,7 @@ export interface FileRouteTypes {
     | '/'
     | '/(app)'
     | '/(app)/dashboard'
+    | '/(app)/resume'
     | '/(auth)/sign-in'
     | '/(auth)/sign-up'
     | '/api/health'
@@ -149,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof appDashboardRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/(app)/resume': {
+      id: '/(app)/resume'
+      path: '/resume'
+      fullPath: '/resume'
+      preLoaderRoute: typeof appResumeRouteImport
       parentRoute: typeof appRouteRoute
     }
     '/(auth)/sign-in': {
@@ -191,10 +210,12 @@ declare module '@tanstack/react-router' {
 
 interface appRouteRouteChildren {
   appDashboardRoute: typeof appDashboardRoute
+  appResumeRoute: typeof appResumeRoute
 }
 
 const appRouteRouteChildren: appRouteRouteChildren = {
   appDashboardRoute: appDashboardRoute,
+  appResumeRoute: appResumeRoute,
 }
 
 const appRouteRouteWithChildren = appRouteRoute._addFileChildren(

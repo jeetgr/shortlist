@@ -2,7 +2,7 @@
 
 Claude manages this file. Step details are in `ROADMAP.md`.
 
-Current step: 2.3
+Current step: 3.1
 
 ## Phase 0: Foundation
 
@@ -23,7 +23,7 @@ Current step: 2.3
 
 - [x] 2.1 Resume schema
 - [x] 2.2 Resume API (hand-checked, tests deferred to 7.4)
-- [ ] 2.3 Resume editor
+- [x] 2.3 Resume editor
 
 ## Phase 3: Tracker and first deploy
 
@@ -70,7 +70,6 @@ Current step: 2.3
 
 ## Follow-ups
 
-- 2.3: click sign-out in the browser, then sign in as another user, and confirm no cached resume data shows.
 - 7.2: add size limits to `resumeSchema` arrays and text, so one user can't store an unbounded resume.
 - 7.2: after adding email verification, test that Google links to a verified password account. Until then, Better Auth blocks linking to unverified accounts.
 - 7.2: show a friendly message when Google sign-in fails with `account_not_linked`.
