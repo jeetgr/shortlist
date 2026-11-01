@@ -2,7 +2,7 @@
 
 Claude manages this file. Step details are in `ROADMAP.md`.
 
-Current step: 3.2
+Current step: 3.3
 
 ## Phase 0: Foundation
 
@@ -28,7 +28,7 @@ Current step: 3.2
 ## Phase 3: Tracker and first deploy
 
 - [x] 3.1 Application API (hand-checked, tests deferred to 7.4)
-- [ ] 3.2 Tracker UI
+- [x] 3.2 Tracker UI
 - [ ] 3.3 Production images
 - [ ] 3.4 Deploy
 
@@ -77,7 +77,7 @@ Current step: 3.2
 - 3.3: add `compose.prod.yaml` with app and worker images, strong secrets, and no public Postgres or Redis ports.
 - 3.3: `nitro` is a pinned beta, so check for a stable release before the production build.
 - 3.3: remove the unused `@sentry` external from `vite.config.ts`, unless Sentry gets added in 7.3.
-- 7.5: replace the starter page title and README.
+- 7.5: replace the starter page title and README, and send signed-in users from `/` to the dashboard, because `/` has no links into the app.
 
 ## Ideas for later
 

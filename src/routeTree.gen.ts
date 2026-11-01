@@ -16,8 +16,12 @@ import { Route as appResumeRouteImport } from './routes/(app)/resume'
 import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as authSignUpRouteImport } from './routes/(auth)/sign-up'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
+import { Route as appApplicationsIndexRouteImport } from './routes/(app)/applications/index'
+import { Route as appApplicationsNewRouteImport } from './routes/(app)/applications/new'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc/$'
+import { Route as appApplicationsIdIndexRouteImport } from './routes/(app)/applications/$id/index'
+import { Route as appApplicationsIdEditRouteImport } from './routes/(app)/applications/$id/edit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -53,6 +57,16 @@ const ApiHealthRoute = ApiHealthRouteImport.update({
   path: '/api/health',
   getParentRoute: () => rootRouteImport,
 } as any)
+const appApplicationsIndexRoute = appApplicationsIndexRouteImport.update({
+  id: '/applications/',
+  path: '/applications/',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const appApplicationsNewRoute = appApplicationsNewRouteImport.update({
+  id: '/applications/new',
+  path: '/applications/new',
+  getParentRoute: () => appRouteRoute,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -63,6 +77,16 @@ const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   path: '/api/rpc/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const appApplicationsIdIndexRoute = appApplicationsIdIndexRouteImport.update({
+  id: '/applications/$id/',
+  path: '/applications/$id/',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const appApplicationsIdEditRoute = appApplicationsIdEditRouteImport.update({
+  id: '/applications/$id/edit',
+  path: '/applications/$id/edit',
+  getParentRoute: () => appRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -71,8 +95,12 @@ export interface FileRoutesByFullPath {
   '/sign-in': typeof authSignInRoute
   '/sign-up': typeof authSignUpRoute
   '/api/health': typeof ApiHealthRoute
+  '/applications/new': typeof appApplicationsNewRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/applications/': typeof appApplicationsIndexRoute
+  '/applications/$id/edit': typeof appApplicationsIdEditRoute
+  '/applications/$id/': typeof appApplicationsIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -81,8 +109,12 @@ export interface FileRoutesByTo {
   '/sign-in': typeof authSignInRoute
   '/sign-up': typeof authSignUpRoute
   '/api/health': typeof ApiHealthRoute
+  '/applications/new': typeof appApplicationsNewRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/applications': typeof appApplicationsIndexRoute
+  '/applications/$id/edit': typeof appApplicationsIdEditRoute
+  '/applications/$id': typeof appApplicationsIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -93,8 +125,12 @@ export interface FileRoutesById {
   '/(auth)/sign-in': typeof authSignInRoute
   '/(auth)/sign-up': typeof authSignUpRoute
   '/api/health': typeof ApiHealthRoute
+  '/(app)/applications/new': typeof appApplicationsNewRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/(app)/applications/': typeof appApplicationsIndexRoute
+  '/(app)/applications/$id/edit': typeof appApplicationsIdEditRoute
+  '/(app)/applications/$id/': typeof appApplicationsIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -105,8 +141,12 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/api/health'
+    | '/applications/new'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/applications/'
+    | '/applications/$id/edit'
+    | '/applications/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -115,8 +155,12 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/api/health'
+    | '/applications/new'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/applications'
+    | '/applications/$id/edit'
+    | '/applications/$id'
   id:
     | '__root__'
     | '/'
@@ -126,8 +170,12 @@ export interface FileRouteTypes {
     | '/(auth)/sign-in'
     | '/(auth)/sign-up'
     | '/api/health'
+    | '/(app)/applications/new'
     | '/api/auth/$'
     | '/api/rpc/$'
+    | '/(app)/applications/'
+    | '/(app)/applications/$id/edit'
+    | '/(app)/applications/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -191,6 +239,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiHealthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(app)/applications/': {
+      id: '/(app)/applications/'
+      path: '/applications'
+      fullPath: '/applications/'
+      preLoaderRoute: typeof appApplicationsIndexRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/(app)/applications/new': {
+      id: '/(app)/applications/new'
+      path: '/applications/new'
+      fullPath: '/applications/new'
+      preLoaderRoute: typeof appApplicationsNewRouteImport
+      parentRoute: typeof appRouteRoute
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -205,17 +267,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiRpcSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(app)/applications/$id/': {
+      id: '/(app)/applications/$id/'
+      path: '/applications/$id'
+      fullPath: '/applications/$id/'
+      preLoaderRoute: typeof appApplicationsIdIndexRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/(app)/applications/$id/edit': {
+      id: '/(app)/applications/$id/edit'
+      path: '/applications/$id/edit'
+      fullPath: '/applications/$id/edit'
+      preLoaderRoute: typeof appApplicationsIdEditRouteImport
+      parentRoute: typeof appRouteRoute
+    }
   }
 }
 
 interface appRouteRouteChildren {
   appDashboardRoute: typeof appDashboardRoute
   appResumeRoute: typeof appResumeRoute
+  appApplicationsNewRoute: typeof appApplicationsNewRoute
+  appApplicationsIndexRoute: typeof appApplicationsIndexRoute
+  appApplicationsIdEditRoute: typeof appApplicationsIdEditRoute
+  appApplicationsIdIndexRoute: typeof appApplicationsIdIndexRoute
 }
 
 const appRouteRouteChildren: appRouteRouteChildren = {
   appDashboardRoute: appDashboardRoute,
   appResumeRoute: appResumeRoute,
+  appApplicationsNewRoute: appApplicationsNewRoute,
+  appApplicationsIndexRoute: appApplicationsIndexRoute,
+  appApplicationsIdEditRoute: appApplicationsIdEditRoute,
+  appApplicationsIdIndexRoute: appApplicationsIdIndexRoute,
 }
 
 const appRouteRouteWithChildren = appRouteRoute._addFileChildren(
