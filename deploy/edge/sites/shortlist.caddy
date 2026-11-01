@@ -1,0 +1,4 @@
+{$SHORTLIST_HOST} {
+  import security_headers
+  reverse_proxy shortlist-app:3000
+}

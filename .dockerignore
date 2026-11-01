@@ -12,3 +12,4 @@ Dockerfile
 compose*.yaml
 *.md
 src/generated
+deploy

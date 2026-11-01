@@ -77,7 +77,8 @@ Current step: 3.4
 - 7.5: `nitro` is a pinned beta. As of 2026-11-01 the newest is `3.0.261029-rc`, with no stable release, so recheck before launch.
 - 4.1: add the worker image and service to `compose.prod.yaml`, and add it to the VPS memory budget.
 - 3.4: deploy using the conventions in `work/games/deploy/vps-setup.md`, "Adding another site": `/srv/shortlist`, `sites/shortlist.caddy` pointing at `shortlist-app:3000`, and a backup script and cron line.
-- 3.4: the VPS Docker login for `ghcr.io` belongs to `webcyte`, and Docker keeps one login per registry, so pulling private `jeetgr` images needs a separate `DOCKER_CONFIG` or public packages.
+- 3.4: make the GHCR packages public, since the repo is public, so the VPS can pull them without replacing its `webcyte` login.
+- 3.4: backups sit on the VPS itself. Keep encrypted copies off the server too.
 - 7.5: replace the starter page title and README, and send signed-in users from `/` to the dashboard, because `/` has no links into the app.
 
 ## Ideas for later
