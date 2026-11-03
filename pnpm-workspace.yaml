@@ -3,3 +3,5 @@ allowBuilds:
   esbuild: true
   lightningcss: true
   prisma: true
+  # Optional native speedup for BullMQ. msgpackr falls back to plain JS without it.
+  msgpackr-extract: false

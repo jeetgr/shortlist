@@ -116,6 +116,30 @@ services:
         limits:
           memory: 512m
 
+  # Runs background jobs. No healthcheck: a crash exits the process and the restart policy
+  # brings it back. The grace period lets a running job finish during a deploy.
+  worker:
+    image: ghcr.io/jeetgr/shortlist-worker:${IMAGE_TAG:-latest}
+    build:
+      <<: *build
+      target: worker
+    restart: unless-stopped
+    stop_grace_period: 30s
+    environment:
+      DATABASE_URL: *database-url
+      REDIS_URL: *redis-url
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+
 networks:
   edge:
     external: true

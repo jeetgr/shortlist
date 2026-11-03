@@ -18,7 +18,7 @@ group "default" {
 
 target "image" {
   name      = t
-  matrix    = { t = ["app", "migrate"] }
+  matrix    = { t = ["app", "worker", "migrate"] }
   context   = "."
   target    = t
   platforms = ["linux/amd64"]

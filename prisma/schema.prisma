@@ -19,6 +19,7 @@ model User {
   accounts      Account[]
   resume        Resume?
   applications  Application[]
+  aiJobs        AiJob[]
 
   @@unique([email])
   @@map("user")
@@ -123,4 +124,30 @@ model ApplicationEvent {
 
   @@index([applicationId, createdAt])
   @@map("application_event")
+}
+
+enum AiJobType {
+  fake
+}
+
+enum AiJobStatus {
+  queued
+  running
+  completed
+  failed
+}
+
+model AiJob {
+  id         String      @id @default(uuid())
+  userId     String
+  type       AiJobType
+  status     AiJobStatus @default(queued)
+  error      String?
+  attempts   Int         @default(0)
+  createdAt  DateTime    @default(now())
+  finishedAt DateTime?
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("ai_job")
 }

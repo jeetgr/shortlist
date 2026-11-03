@@ -22,6 +22,7 @@ COPY . .
 # The Prisma config needs a URL to load, but generating the client never connects to it.
 RUN DATABASE_URL=postgresql://build:build@localhost:5432/build pnpm db:generate
 RUN pnpm build
+RUN pnpm build:worker
 
 # ---------- migrate-build: only what `prisma migrate deploy` needs ----------
 # The full install is about 2 GB. Both versions are exact pins read from package.json.
@@ -42,6 +43,15 @@ COPY --chown=node:node prisma ./prisma
 COPY --chown=node:node prisma7.config.ts ./
 USER node
 CMD ["node_modules/.bin/prisma", "migrate", "deploy", "--config", "prisma7.config.ts"]
+
+# One bundle with no node_modules. Picks up background jobs from Redis.
+FROM node:${NODE_VERSION}-alpine AS worker
+ENV NODE_ENV=production \
+    TZ=Asia/Kolkata
+WORKDIR /app
+COPY --from=build --chown=node:node /app/dist/worker ./dist
+USER node
+CMD ["node", "dist/index.mjs"]
 
 # The Nitro bundle carries its own node_modules.
 FROM node:${NODE_VERSION}-alpine AS app

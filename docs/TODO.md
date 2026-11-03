@@ -2,7 +2,7 @@
 
 Claude manages this file. Step details are in `ROADMAP.md`.
 
-Current step: 4.1
+Current step: 4.2
 
 ## Phase 0: Foundation
 
@@ -34,7 +34,7 @@ Current step: 4.1
 
 ## Phase 4: Job match
 
-- [ ] 4.1 Queue and worker
+- [x] 4.1 Queue and worker
 - [ ] 4.2 Retries and failures
 - [ ] 4.3 AI layer with mock
 - [ ] 4.4 Requirement extraction
@@ -75,7 +75,8 @@ Current step: 4.1
 - 7.2: after adding email verification, test that Google links to a verified password account. Until then, Better Auth blocks linking to unverified accounts.
 - 7.2: show a friendly message when Google sign-in fails with `account_not_linked`.
 - 7.5: `nitro` is a pinned beta. As of 2026-11-01 the newest is `3.0.261029-rc`, with no stable release, so recheck before launch.
-- 4.1: add the worker image and service to `compose.prod.yaml`, and add it to the VPS memory budget.
+- 4.2: a job whose worker crashes twice is marked failed by BullMQ, and its row must end up `failed` too. Test it.
+- 4.4: remove the test job card from the dashboard and the `fake` job type once the real job match exists.
 - Before real users: move to Neon or add encrypted backups, then test a restore. Production Postgres has no backups until then.
 - 7.5: replace the starter page title and README, and send signed-in users from `/` to the dashboard, because `/` has no links into the app.
 
